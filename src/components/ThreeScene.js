@@ -1,12 +1,50 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { planetCards } from './cardsData';
+import PlanetCard from './PlanetCard';
+
+const planetData = {
+  mercury: { title: 'Mercury', description: 'More links or documents.', link: '/resume' },
+  venus: { title: 'Venus', description: 'Visit my Projects.', link: '/projects' },
+  earth: { title: 'Earth', description: 'About Me', link: '/portfolio' },
+  mars: { title: 'Mars', description: 'Learn More About Me.', link: '/about' },
+  jupiter: { title: 'Jupiter', description: 'View My GitHub.', link: 'https://github.com' },
+  saturn: { title: 'Saturn', description: 'Contact Me.', link: '/contact' },
+  uranus: { title: 'Uranus', description: 'Visit My LinkedIn.', link: '/blog' },
+  neptune: { title: 'Neptune', description: 'View My Resume.', link: '/resume' },
+
+};
 
 const ThreeScene = () => {
   const mountRef = useRef(null);
+  const [selectedCard, setSelectedCard] = React.useState(null); 
 
   useEffect(() => {
     if (!mountRef.current) return; // Prevent null errors during render
+
+    // Raycaster and Mouse
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    // Create the Sun
+  const createSun = () => {
+  const sunGeometry = new THREE.SphereGeometry(2, 64, 64); // Larger size for the Sun
+  const sunMaterial = new THREE.MeshStandardMaterial({
+    emissive: 0xffa500, // Orange glow for the Sun
+    emissiveIntensity: 2, // Glow intensity
+    color: 0xffd700, // Yellow surface
+  });
+  const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+  sun.position.set(0, 0, 0); // Center of the scene
+  scene.add(sun);
+
+  // Add a light source to mimic sunlight
+  const sunLight = new THREE.PointLight(0xffd700, 3, 75); // Bright yellow light
+  sunLight.position.set(0, 0, 0);
+  scene.add(sunLight);
+
+  return sun;
+};
 
     // Scene, Camera, Renderer
     const scene = new THREE.Scene();
@@ -43,6 +81,27 @@ const ThreeScene = () => {
       return planet;
     };
 
+        // Raycaster Event Listener for Clicks
+        const onMouseClick = (event) => {
+          mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+          mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    
+          raycaster.setFromCamera(mouse, camera);
+          const intersects = raycaster.intersectObjects(Object.values(planets));
+    
+          if (intersects.length > 0) {
+            const clickedPlanet = intersects[0].object;
+            for (const [name, planet] of Object.entries(planets)) {
+              if (planet === clickedPlanet) {
+                setSelectedCard(planetData[name]);
+                break;
+              }
+            }
+          }
+        };
+    
+        window.addEventListener('click', onMouseClick);
+
     // Planet with Rings
     const createPlanetWithRings = (planetTexture, ringTexture, position) => {
       const planet = createPlanet(planetTexture, position);
@@ -60,7 +119,9 @@ const ThreeScene = () => {
 
     // Load Planets
     const loadPlanets = () => {
+      const sun = createSun();
       return {
+        sun, // Sun is a special case
         mercury: createPlanet('./images/mercury_texture.jpg', [3, 0, 0]),
         venus: createPlanet('./images/venus_texture.jpg', [4, 0, 0]),
         earth: createPlanet('./images/earth_texture.jpg', [5, 0, 0]),
@@ -76,6 +137,8 @@ const ThreeScene = () => {
     addLighting();
     const planets = loadPlanets();
 
+
+
     // Orbit Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     camera.position.set(0, 5, 30);
@@ -87,30 +150,15 @@ const ThreeScene = () => {
       requestAnimationFrame(animate);
       time += 0.01;
 
-      // Planet Orbits
-      planets.mercury.position.x = 3 * Math.cos(time * 1.8);
-      planets.mercury.position.z = 3 * Math.sin(time * 1.8);
-
-      planets.venus.position.x = 4 * Math.cos(time * 1.5);
-      planets.venus.position.z = 4 * Math.sin(time * 1.5);
-
-      planets.earth.position.x = 5 * Math.cos(time);
-      planets.earth.position.z = 5 * Math.sin(time);
-
-      planets.mars.position.x = 7 * Math.cos(time * 0.8);
-      planets.mars.position.z = 7 * Math.sin(time * 0.8);
-
-      planets.jupiter.position.x = 10 * Math.cos(time * 0.5);
-      planets.jupiter.position.z = 10 * Math.sin(time * 0.5);
-
-      planets.saturn.position.x = 13 * Math.cos(time * 0.4);
-      planets.saturn.position.z = 13 * Math.sin(time * 0.4);
-
-      planets.uranus.position.x = 15 * Math.cos(time * 0.3);
-      planets.uranus.position.z = 15 * Math.sin(time * 0.3);
-
-      planets.neptune.position.x = 18 * Math.cos(time * 0.2);
-      planets.neptune.position.z = 18 * Math.sin(time * 0.2);
+        // Planets orbit around the Sun
+    planets.mercury.position.set(3 * Math.cos(time * 1.8), 0, 3 * Math.sin(time * 1.8));
+    planets.venus.position.set(4 * Math.cos(time * 1.5), 0, 4 * Math.sin(time * 1.5));
+    planets.earth.position.set(5 * Math.cos(time), 0, 5 * Math.sin(time));
+    planets.mars.position.set(7 * Math.cos(time * 0.8), 0, 7 * Math.sin(time * 0.8));
+    planets.jupiter.position.set(10 * Math.cos(time * 0.5), 0, 10 * Math.sin(time * 0.5));
+    planets.saturn.position.set(13 * Math.cos(time * 0.4), 0, 13 * Math.sin(time * 0.4));
+    planets.uranus.position.set(15 * Math.cos(time * 0.3), 0, 15 * Math.sin(time * 0.3));
+    planets.neptune.position.set(18 * Math.cos(time * 0.2), 0, 18 * Math.sin(time * 0.2));
 
       controls.update();
       renderer.render(scene, camera);
@@ -133,7 +181,19 @@ const ThreeScene = () => {
     };
   }, []);
 
-  return <div ref={mountRef} style={{ width: '100%', height: '100vh' }} />;
+  return (
+    <div ref={mountRef} style={{ width: '100%', height: '100vh', position: 'relative' }}>
+      {selectedCard && (
+        <PlanetCard
+          title={selectedCard.title}
+          description={selectedCard.description}
+          link={selectedCard.link}
+          onClose={() => setSelectedCard(null)}
+        />
+      )}
+    </div>
+  );
 };
+
 
 export default ThreeScene;

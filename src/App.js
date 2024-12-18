@@ -1,15 +1,19 @@
-import React from 'react';
-import ThreeScene from './components/ThreeScene';
-
-const App = () => {
+import React from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import ThreeScene from "./components/ThreeScene";
+import './styles/global.css';
+function App() {
   return (
-    <div>
-      <h1>My Dynamic Portfolio Universe</h1>
-      <p>This is a test, to ensure everything is working.</p>
-      <p>Pick a planet and find out more about me, and what I do.</p>
+    <div style={{ position: "relative", overflow: "hidden" }}>
+      <Navbar />
       <ThreeScene />
+      <div style={{ position: "absolute", top: "10%", right: "10px", zIndex: 10 }}>
+        
+      </div>
+      <Footer />
     </div>
   );
-};
+}
 
 export default App;
