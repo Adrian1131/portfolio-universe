@@ -3,64 +3,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import PlanetCard from './PlanetCard';
 import gsap from 'gsap';
+import { planetData } from './cardsData';
 
-// Planet data
-const planetData = {
-  mercury: {
-    title: 'Mercury',
-    description: 'Mercury is the smallest planet in our solar system and closest to the Sun. It has a rocky surface covered with craters and no atmosphere to retain heat.',
-    link: '/resume',
-  },
-  venus: {
-    title: 'Venus',
-    description: 'Venus is often called Earth’s twin because of its similar size and composition. However, its surface is hot enough to melt lead.',
-    link: '/projects',
-  },
-  earth: {
-    title: 'Earth',
-    description: `
-      Hello! I'm [Your Name], a passionate software engineer with expertise in 
-      full-stack development, machine learning, and data engineering.
-      
-      🌱 I love building interactive and immersive projects, like this planetary universe you're exploring.
-      
-      📚 My skills include JavaScript, React, Node.js, Python, and more.
-      
-      🌟 I'm driven by curiosity and the challenge of solving complex problems with elegant solutions.
-      
-      🔗 Check out my portfolio and GitHub below!
-    `,
-    links: [
-      { text: 'Portfolio', url: '/portfolio' },
-      { text: 'GitHub', url: 'https://github.com/adrian1131' },
-    ],
-  },
-  mars: {
-    title: 'Mars',
-    description: 'Mars is known as the Red Planet due to its reddish appearance caused by iron oxide on its surface. It has the largest volcano in the solar system, Olympus Mons.',
-    link: '/about',
-  },
-  jupiter: {
-    title: 'Jupiter',
-    description: 'Jupiter is the largest planet in the solar system and is famous for its Great Red Spot, a massive storm that has lasted for centuries.',
-    link: 'https://github.com',
-  },
-  saturn: {
-    title: 'Saturn',
-    description: 'Saturn is best known for its stunning ring system, which is made of ice particles, rocky debris, and dust.',
-    link: '/contact',
-  },
-  uranus: {
-    title: 'Uranus',
-    description: 'Uranus is unique for its sideways rotation and pale blue color, caused by methane in its atmosphere.',
-    link: '/blog',
-  },
-  neptune: {
-    title: 'Neptune',
-    description: 'Neptune is the farthest planet from the Sun and is known for its deep blue color and powerful winds.',
-    link: '/resume',
-  },
-};
 
 const ThreeScene = () => {
   const mountRef = useRef(null);
@@ -79,22 +23,12 @@ const ThreeScene = () => {
   const resetView = () => {
     setIsZoomed(false);
     setSelectedCard(null);
-    setSelectedPlanet(null);
-
-    const camera = cameraRef.current;
-    const scene = sceneRef.current;
-
-    if (camera && scene) {
-      gsap.to(camera.position, {
-        duration: 1.5,
-        x: 0,
-        y: 10,
-        z: 30,
-        onUpdate: () => {
-          camera.lookAt(new THREE.Vector3(0, 0, 0));
-        },
-      });
-    }
+    const defaultPosition = { x: 0, y: 10, z: 30 };
+    gsap.to(cameraRef.current.position, {
+      duration: 1.5,
+      ...defaultPosition,
+      onUpdate: () => cameraRef.current.lookAt(new THREE.Vector3(0, 0, 0)),
+    });
   };
 
   // Zoom to Planet
@@ -217,19 +151,21 @@ const ThreeScene = () => {
 
     // Raycaster Click Event
     const onMouseClick = (event) => {
+      if (!camera || !scene) return;
+    
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
+    
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(Object.values(planets));
-
+    
       if (intersects.length > 0) {
         const clickedPlanet = intersects[0].object;
         const planetName = Object.keys(planets).find((name) => planets[name] === clickedPlanet);
-
+    
         if (planetName) {
-          setSelectedCard(planetData[planetName]);
-          setSelectedPlanet(clickedPlanet);
+          setSelectedCard(planetData[planetName]); // Use imported planetData here
+          setIsZoomed(true);
           zoomToPlanet(clickedPlanet);
         }
       }
@@ -268,16 +204,15 @@ const ThreeScene = () => {
   }, []);
 
   return (
-    <div ref={mountRef} style={{ width: '100%', height: '100vh' }}>
+    <div ref={mountRef} style={{ width: '100%', height: '100vh', position: 'relative' }}>
+      {/* The 3D Scene */}
       {isZoomed && selectedCard && (
-        <div className="planet-card-wrapper">
-          <PlanetCard
-            title={selectedCard.title}
-            description={selectedCard.description}
-            link={selectedCard.link}
-            onClose={resetView}
-          />
-        </div>
+        <PlanetCard
+          title={selectedCard.title}
+          description={selectedCard.description}
+          links={selectedCard.links}
+          onClose={resetView}
+        />
       )}
     </div>
   );

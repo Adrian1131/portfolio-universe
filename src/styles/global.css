@@ -1,71 +1,66 @@
-/* Planet Card Styling */
 .planet-card-wrapper {
-  position: absolute;
-  top: 10%; /* Start a bit below the top */
+  position: fixed;
+  top: 15%; /* Adjust top alignment */
   right: 5%; /* Align to the right */
-  width: 350px; /* Increased width for better content fit */
+  width: 400px; /* Width for detailed information */
   padding: 20px;
-  background-color: rgba(30, 30, 30, 0.95); /* Semi-transparent dark background */
+  background-color: rgba(30, 30, 30, 0.95);
   color: #f5f5f5;
-  border-radius: 12px;
+  border-radius: 15px;
   z-index: 1000;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Enhanced depth */
-  text-align: left; /* Align text properly */
-  overflow-y: auto; /* Scroll for long content */
-  max-height: 80%; /* Prevent overflow on smaller screens */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  overflow-y: auto;
+  max-height: 80%; /* Prevent overflow */
+  animation: fadeIn 0.5s ease-in-out; /* Smooth fade-in animation */
 }
 
-/* Planet Card Heading */
 .planet-card-wrapper h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #00aaff;
-  border-bottom: 2px solid #005bb5;
+  font-size: 22px;
+  color: #00aaff; /* Highlighted blue for titles */
+  margin-bottom: 10px;
+  border-bottom: 2px solid #005bb5; /* Subtle underline */
   padding-bottom: 5px;
 }
 
-/* Planet Card Description */
 .planet-card-wrapper p {
   font-size: 16px;
-  color: #ddd;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  color: #dddddd; /* Softer gray text */
+  line-height: 1.6; /* Spaced lines for readability */
 }
 
-/* Links and Buttons */
 .planet-card-wrapper a {
-  display: block;
-  margin: 10px 0;
-  padding: 8px 15px;
-  background-color: #0077cc;
-  color: #ffffff;
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #005bb5; /* Button background */
+  color: #ffffff; /* Button text color */
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 5px; /* Rounded button */
   font-weight: bold;
-  text-align: center;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .planet-card-wrapper a:hover {
-  background-color: #005bb5;
-  transform: scale(1.05);
+  background-color: #003f7f; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight zoom effect */
 }
 
 .planet-card-wrapper button {
-  margin-top: 15px;
+  margin-top: 20px;
   padding: 10px 20px;
-  background-color: #f44336;
-  color: #ffffff;
+  background-color: #f44336; /* Button background */
+  color: #ffffff; /* Button text color */
   border: none;
-  border-radius: 5px;
+  border-radius: 5px; /* Smooth button corners */
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .planet-card-wrapper button:hover {
-  background-color: #d32f2f;
-  transform: scale(1.05);
+  background-color: #d32f2f; /* Darker red on hover */
+  transform: scale(1.05); /* Slight zoom effect */
 }
 
 /* Three.js Scene Styling */
@@ -77,14 +72,97 @@
   background: radial-gradient(circle, #000000, #111111); /* Space-themed gradient */
 }
 
-/* Body Styling */
+/* Wrapper for the main content */
+.content-wrapper {
+  position: absolute; /* Makes it fixed relative to the screen */
+  top: 15%; /* Vertically adjusts the content */
+  left: 5%; /* Moves it further to the left */
+  max-width: 400px; /* Keeps the content compact */
+  z-index: 2; /* Ensure it sits above the 3D canvas */
+  text-align: left;
+}
+
+/* Header styles */
+.content-wrapper h1 {
+  font-size: 2.5rem;
+  margin: 20px 0;
+}
+
+/* Paragraph styles */
+.content-wrapper p {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+/* Additional global styles (already existing styles) */
 body {
-  font-family: "Roboto", sans-serif; /* Clean, modern font */
+  font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
   background-color: #111;
   color: white;
-  overflow: hidden; /* Prevent unwanted scrollbars */
+}
+
+/* Navbar Styles */
+.navbar {
+  background: linear-gradient(90deg, #222, #333); /* Sleek gradient background */
+  padding: 1rem 2rem;
+  position: sticky; /* Sticks to the top on scroll */
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between; /* Evenly space items */
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  display: inline-block;
+}
+
+.navbar a {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+.navbar a:hover {
+  background-color: #00aaff; /* Highlight with blue */
+  color: white;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.navbar a:active {
+  transform: scale(0.98); /* Subtle click animation */
+}
+
+/* Body Styling */
+body {
+  font-family: monospace, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  color: white;
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+#three-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1; /* Place behind all content */
 }
 
 /* Header and Footer */

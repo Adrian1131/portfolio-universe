@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.acfa2828.css","mappings":"AAEA,IAEI,YAAa,CACb,eAAgB,CAFhB,UAGF","sources":["styles/global.css"],"sourcesContent":["\n/* global.css or inline styles */\ndiv {\n    width: 100%;\n    height: 100vh; /* Adjust as needed */\n    overflow: hidden;\n  }"],"names":[],"sourceRoot":""}
