@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Ro
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ThreeScene from "./components/ThreeScene";
-import About from "./components/About"; // Component for the About page
+import About from "./pages/About"; // Component for the About page
 import './styles/global.css'; // Global CSS for shared styles
 
 function App() {

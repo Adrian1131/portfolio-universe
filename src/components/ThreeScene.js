@@ -89,7 +89,7 @@ const ThreeScene = () => {
     // Background Stars
     const textureLoader = new THREE.TextureLoader();
     const starsTexture = textureLoader.load('./images/stars.jpg', () => {
-      scene.background = starsTexture;
+    scene.background = starsTexture;
     });
 
     // Lighting

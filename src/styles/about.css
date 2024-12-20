@@ -1,23 +1,84 @@
+body {
+  overflow: auto;
+}
+.about-container {
+  overflow-y: auto; /* Enables vertical scrolling */
+  max-height: 100vh; /* Limits height to the viewport */
+  padding: 20px; /* Optional padding for better layout */
+}
+.about-container {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 100vh;
+  background: linear-gradient(135deg, #0d0d0d, #1a1a1a); /* Dark gradient background */
+  color: #f5f5f5; /* Light text for readability */
+  font-family: "Roboto", sans-serif;
+  line-height: 1.8;
+}
 
-.about-section {
-    padding: 2rem;
-    background-color: #f0f0f0;
-    color: #333;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
-    margin: 2rem auto;
-    line-height: 1.6;
-  }
-  
-  .about-section h1 {
-    font-size: 2.5rem;
-    color: #005bb5;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  
-  .about-section p {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
+.about-container h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #00aaff; /* Neon blue for the main heading */
+  text-shadow: 0 0 10px rgba(0, 170, 255, 0.8); /* Subtle glow effect */
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: #dddddd;
+}
+
+.about-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.about-container ul li {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  background-color: rgba(30, 30, 30, 0.8); /* Semi-transparent dark background */
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.about-container ul li:hover {
+  background-color: rgba(50, 50, 50, 0.8);
+  transform: translateY(-2px); /* Slight hover lift */
+  transition: all 0.3s ease;
+}
+
+.about-container a {
+  color: #00aaff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.about-container a:hover {
+  color: #0088cc; /* Slightly darker blue on hover */
+}
+
+.about-container .button {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #00aaff, #005bb5);
+  color: #ffffff;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 170, 255, 0.5);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.about-container .button:hover {
+  background: linear-gradient(135deg, #0088cc, #003f7f);
+  transform: translateY(-2px); /* Hover lift */
+}
