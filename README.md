@@ -1,4 +1,5 @@
 # portfolio-universe
+# This project will be transistioned into a planet simulation, no longer a website! Updating will begin soon!
 Welcome to my 3D Universe Portfolio! This interactive web application uses a 3D environment to showcase my skills, experience, and projects in a visually captivating way.
 
 Table of Contents
