@@ -9,7 +9,8 @@ export const planetData = {
     So that is when I really decided to go all the way and get a degree in Computer Science.
     I have a passion for solving problems, and want to innovate and assist in businesses with my skills.`,
     links: [
-      { text: 'Learn More', url: 'https://en.wikipedia.org/wiki/Mercury_(planet)' },
+      { text: 'GitHub', url: 'https://github.com/adrian1131' },
+      { text: 'LinkedIn', url: 'https://linkedin.com/in/your-profile' }
     ],
   },
   earth: {
@@ -68,18 +69,7 @@ export const planetData = {
     ],
   },
   venus: {
-    title: 'Venus - Projects',
-    description: `I started doing some projects to refine my technical skills.
-    In university, I have taken many courses which opened my eyes in many fields of computer science.
-    My most recent project was a Neo Vim coniguration using Lua, which I enjoyed doing since it is 
-    very backend oriented. I am currently working on this personal website as a project, to expand my skills in
-    full-stack development.`,
-    links: [
-      { text: 'Learn More', url: 'https://en.wikipedia.org/wiki/Venus' },
-    ],
-  },
-  mercury: {
-    title: 'Mercury - Techonologies',
+    title: 'Venus - Technologies',
     description: `I have been learning a lot of technologies to help me grow in the field of computer science.
     I mainly like to use Python, and C++. I also have been using databases, and things like MariaDB, and MongoDB.
     I really would like to get better using Rust as well. I have done a project using React, which this website
@@ -87,7 +77,8 @@ export const planetData = {
     in a System Administration course, I learned about Linux, and some even crazier technologies. To get more 
     insight, check out my resume!`,
     links: [
-      { text: 'Learn More', url: 'https://en.wikipedia.org/wiki/Mercury_(planet)' },
+      { text: 'Resume', url: '/resume.pdf' },
+      { text: 'GitHub', url: 'https://github.com/adrian1131' }
     ],
   },
   mars: {

@@ -1,0 +1,120 @@
+.planet-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  background: rgba(13, 17, 23, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5),
+              0 0 60px rgba(138, 43, 226, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  z-index: 1000;
+  animation: cardAppear 0.5s ease-out;
+  overflow-y: auto;
+}
+
+.planet-card-content {
+  padding: 2rem;
+  position: relative;
+}
+
+.planet-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+  border-bottom: 2px solid rgba(138, 43, 226, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.planet-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #e1e1e1;
+}
+
+.planet-description p {
+  margin-bottom: 1rem;
+}
+
+.planet-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.planet-link {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: rgba(138, 43, 226, 0.2);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  transition: all 0.3s ease;
+}
+
+.planet-link:hover {
+  background: rgba(138, 43, 226, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Scrollbar styling */
+.planet-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.planet-card::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.planet-card::-webkit-scrollbar-thumb {
+  background: rgba(138, 43, 226, 0.3);
+  border-radius: 4px;
+}
+
+.planet-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(138, 43, 226, 0.5);
+} 
